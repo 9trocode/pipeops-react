@@ -9,7 +9,7 @@ RUN npm run build
 
 # Final stage
 FROM nginx:1.23.2-alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /dist /usr/share/nginx/html
 ENV PORT=8080
 RUN /bin/sh -c echo 'server_tokens off; \n\
 server { \n\
