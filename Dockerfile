@@ -21,7 +21,8 @@ server { \n\
         try_files $uri /index.html; \n\
     } \n\
 }' > /etc/nginx/templates/default.conf.template
-RUN /bin/sh -c touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d /etc/nginx/templates
+RUN touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d /etc/nginx/templates
 USER nginx
 ENV NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
 ENV NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
