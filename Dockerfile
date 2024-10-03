@@ -3,6 +3,8 @@ FROM node:18 AS builder
 WORKDIR /usr/src/app
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CI=true
+RUN npm run install --force
+RUN npm run build
 
 # Final stage
 FROM nginx:1.23.2-alpine
