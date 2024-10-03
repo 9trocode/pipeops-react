@@ -11,6 +11,13 @@ RUN npm run build
 FROM nginx:1.23.2-alpine
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 ENV PORT=8080
+# Create necessary directories and set up permissions
+RUN mkdir -p /etc/nginx/templates && \
+    chown -R nginx:nginx /etc/nginx && \
+    chmod -R 755 /etc/nginx && \
+    chown -R nginx:nginx /var/cache/nginx /var/log/nginx /usr/share/nginx/html && \
+    touch /var/run/nginx.pid && \
+    chown nginx:nginx /var/run/nginx.pid
 RUN /bin/sh -c echo 'server_tokens off; \n\
 server { \n\
     listen $PORT; \n\
