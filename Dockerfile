@@ -3,6 +3,7 @@ FROM node:18 AS builder
 WORKDIR /usr/src/app
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CI=true
+COPY . .
 RUN npm run install --force
 RUN npm run build
 
