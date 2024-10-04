@@ -25,7 +25,7 @@ RUN mkdir -p /etc/nginx/templates && \
 
 RUN /bin/sh -c echo 'server_tokens off; \n\
 server { \n\
-    listen $PORT; \n\
+    listen ${PORT}; \n\
     server_name localhost; \n\
     location / { \n\
         root /usr/share/nginx/html; \n\
