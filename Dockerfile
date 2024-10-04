@@ -23,10 +23,19 @@ ENV PORT=$PORT
 #     touch /var/run/nginx.pid && \
 #     chown nginx:nginx /var/run/nginx.pid
 
-# Create Nginx configuration template
-RUN echo 'server { listen $PORT default_server; root /usr/share/nginx/html; location / { try_files $uri $uri/ /index.html; } error_page 404 /index.html; include /etc/nginx/mime.types; }' > /etc/nginx/templates/default.conf.template
+# Create Nginx configuration template in /tmp
+RUN echo 'server { \
+    listen $PORT default_server; \
+    root /usr/share/nginx/html; \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+    error_page 404 /index.html; \
+    include /etc/nginx/mime.types; \
+}' > /tmp/default.conf.template
 
+# Set environment variables for template processing
+ENV NGINX_ENVSUBST_TEMPLATE_DIR=/tmp
+ENV NGINX_ENVSUBST_OUTPUT_DIR=/tmp
 USER nginx
-ENV NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
-ENV NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
 CMD ["/bin/sh", "-c", "envsubst '$PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
