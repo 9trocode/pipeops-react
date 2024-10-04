@@ -8,7 +8,7 @@ RUN npm install --quiet --force
 RUN npm run build
 
 # Final stage
-FROM nginx:alpine3.20-slim
+FROM nginxinc/nginx-unprivileged:alpine3.20-slim
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 
 # Use build argument for PORT
