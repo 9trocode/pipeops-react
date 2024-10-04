@@ -16,7 +16,7 @@ ARG PORT
 ENV PORT=$PORT
 
 # Install envsubst
-RUN apk add --no-cache gettext
+# RUN apk add --no-cache gettext
 
 # Create necessary directories and set up permissions
 RUN mkdir -p /etc/nginx/templates && \
