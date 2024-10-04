@@ -38,4 +38,4 @@ RUN echo 'server { \
 ENV NGINX_ENVSUBST_TEMPLATE_DIR=/tmp
 ENV NGINX_ENVSUBST_OUTPUT_DIR=/tmp
 USER nginx
-CMD ["/bin/sh", "-c", "envsubst '$PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+# CMD ["/bin/sh", "-c", "envsubst '$PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
