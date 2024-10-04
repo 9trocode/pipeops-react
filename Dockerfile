@@ -10,7 +10,8 @@ RUN npm run build
 # Final stage
 FROM nginx:1.23.2-alpine
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
-ENV PORT=8080
+ARG PORT
+ENV PORT=$PORT
 # Create necessary directories and set up permissions
 RUN mkdir -p /etc/nginx/templates && \
     chown -R nginx:nginx /etc/nginx && \
