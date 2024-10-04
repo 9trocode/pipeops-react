@@ -26,7 +26,8 @@ RUN mkdir -p /etc/nginx/templates && \
     touch /var/run/nginx.pid && \
     chown nginx:nginx /var/run/nginx.pid
 
-RUN /bin/sh -c echo 'server_tokens off; \n\
+# Create Nginx configuration template
+RUN echo 'server_tokens off; \n\
 server { \n\
     listen ${PORT}; \n\
     server_name localhost; \n\
@@ -40,4 +41,4 @@ server { \n\
 USER nginx
 ENV NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
 ENV NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
-CMD /bin/sh", "-c", "envsubst '$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+CMD ["/bin/sh", "-c", "envsubst '$PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
