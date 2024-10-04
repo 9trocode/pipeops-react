@@ -18,10 +18,10 @@ ENV PORT=$PORT
 # Install envsubst
 # RUN apk add --no-cache gettext
 
-# Create necessary directories and set up permissions
-RUN mkdir -p /etc/nginx/templates && \
-    touch /var/run/nginx.pid && \
-    chown nginx:nginx /var/run/nginx.pid
+# # Create necessary directories and set up permissions
+# RUN mkdir -p /etc/nginx/templates && \
+#     touch /var/run/nginx.pid && \
+#     chown nginx:nginx /var/run/nginx.pid
 
 # Create Nginx configuration template
 RUN echo 'server { listen $PORT default_server; root /usr/share/nginx/html; location / { try_files $uri $uri/ /index.html; } error_page 404 /index.html; include /etc/nginx/mime.types; }' > /etc/nginx/templates/default.conf.template
