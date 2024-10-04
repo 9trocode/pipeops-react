@@ -20,9 +20,6 @@ ENV PORT=$PORT
 
 # Create necessary directories and set up permissions
 RUN mkdir -p /etc/nginx/templates && \
-    chown -R nginx:nginx /etc/nginx && \
-    chmod -R 755 /etc/nginx && \
-    chown -R nginx:nginx /var/cache/nginx /var/log/nginx /usr/share/nginx/html && \
     touch /var/run/nginx.pid && \
     chown nginx:nginx /var/run/nginx.pid
 
