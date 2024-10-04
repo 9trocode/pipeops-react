@@ -15,6 +15,9 @@ COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 ARG PORT
 ENV PORT=$PORT
 
+# Install envsubst
+RUN apk add --no-cache gettext
+
 # Create necessary directories and set up permissions
 RUN mkdir -p /etc/nginx/templates && \
     chown -R nginx:nginx /etc/nginx && \
