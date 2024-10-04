@@ -27,7 +27,7 @@ RUN mkdir -p /etc/nginx/templates && \
     chown nginx:nginx /var/run/nginx.pid
 
 # Create Nginx configuration template
-RUN echo 'server { listen $PORT default_server; root /usr/share/nginx/html; location / { try_files $uri $uri/ /index.html; } error_page 404 /index.html; include /etc/nginx/mime.types; }' > /etc/nginx/conf.d/default.conf.template
+RUN echo 'server { listen $PORT default_server; root /usr/share/nginx/html; location / { try_files $uri $uri/ /index.html; } error_page 404 /index.html; include /etc/nginx/mime.types; }' > /etc/nginx/templates/default.conf.template
 
 USER nginx
 ENV NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
