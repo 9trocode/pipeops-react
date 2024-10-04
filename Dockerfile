@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CI=true
 COPY . .
-RUN npm install --force
+RUN npm install --quiet --force
 RUN npm run build
 
 # Final stage
